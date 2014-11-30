@@ -1,26 +1,54 @@
-<div class="container">
-  <h1>Sign Up</h1>
-
-  <% if @user.errors.any? %>
-    <% @user.errors.full_messages.each do |message| %>
-      <div class="errors"><%= message %></div>
-    <% end %>
+<div id="signupbox" style="margin-top:50px" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+<% if @user.errors.any? %>
+  <div id="login-alert" class="alert alert-danger col-sm-12">
+  <% @user.errors.full_messages.each do |message| %>
+    <div class="errors"><%= message %></div>
   <% end %>
+  </div>
+<% end %>
+    <div class="panel panel-info">
+        <div class="panel-heading">
+            <div class="panel-title">Sign Up</div>
+            <div style="float:right; font-size: 85%; position: relative; top:-10px"><a id="signinlink" href="/sign_in">Sign In</a></div>
+        </div>
+        <div class="panel-body" >
 
-  <form id="sign-up" method="post" action="/users">
-    <label class="label" for="name">Name</label>
-    <input type="text" name="user[name]" placeholder="e.g., joe" value="<%= @user.name %>" >
-    <br>
 
-    <label class="label" for="email">Email</label>
-    <input type="email" name="user[email]" placeholder="e.g., me@example.com" value="<%= @user.email %>">
-    <br>
+            <form id="signupform" class="form-horizontal" role="form" method="post" action="/users">
 
-    <label class="label" for="password">Password</label>
-    <input type="password" name="user[password]" placeholder="6 or more characters">
-    <br>
 
-    <div class="submit"><input type="submit" value="Sign Up"></div>
-  </form>
+                <div class="form-group">
+                    <label for="email" class="col-md-3 control-label">Email</label>
+                    <div class="col-md-9">
+                        <input type="text" class="form-control" name="user[email]" placeholder="Email Address" value="<%= @user.email %>">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="name" class="col-md-3 control-label">Name</label>
+                    <div class="col-md-9">
+                        <input type="text" class="form-control" name="user[name]" placeholder="Name" value="<%= @user.name %>">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="password" class="col-md-3 control-label">Password</label>
+                    <div class="col-md-9">
+                        <input type="password" class="form-control" name="user[password]" placeholder="Password">
+                    </div>
+                </div>
 
-</div>
+                <div class="form-group">
+                    <!-- Button -->
+                    <div class="col-md-offset-3 col-md-9">
+                        <button type="submit" id="btn-signup" type="button" class="btn btn-info"><i class="icon-hand-right"></i> Sign Up</button>
+                        <span style="margin-left:8px;">or</span>
+                    </div>
+                </div>
+                <div style="border-top: 1px solid #999; padding-top:20px"  class="form-group">
+                    <div class="col-md-offset-3 col-md-9">
+                        <button id="btn-fbsignup" type="button" class="btn btn-primary"><i class="icon-twitter"></i>   Sign Up with Twitter</button>
+                    </div>
+                </div>
+            </form>
+         </div>
+    </div>
+ </div>
