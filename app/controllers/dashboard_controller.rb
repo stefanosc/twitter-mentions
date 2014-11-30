@@ -1,3 +1,3 @@
 get '/dashboard' do
-  erb :index
+  erb :"dashboard/show"
 end
