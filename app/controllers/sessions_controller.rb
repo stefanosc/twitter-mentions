@@ -1,5 +1,4 @@
 get '/sign_in' do
-  @user ||= User.new
   erb :sign_in
 end
 
@@ -9,7 +8,6 @@ post '/sign_in' do
     session[:user_id] = @user.id
     redirect to '/'
   else
-    @user = User.new
     @error = "Ooops the email and password you entered don't match"
     @email = params[:email]
     erb :sign_in

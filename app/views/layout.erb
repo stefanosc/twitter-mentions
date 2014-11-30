@@ -2,6 +2,9 @@
 <html lang="en">
 <head>
   <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+  <%= yield_content :head_tag %>
+
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css">
 
@@ -45,7 +48,7 @@
               </li>
             <% else %>
               <li><a href="/sign_in">Sign In</a></li>
-              <li><a href="/users/new">Sign Up</a></li>
+              <li><a href="/sign_up">Sign Up</a></li>
             <% end %>
           </ul>
         </div>
