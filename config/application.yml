@@ -1,0 +1,16 @@
+# Add configuration values here, as shown below.
+#
+# pusher_app_id: "2954"
+# pusher_key: 7381a978f7dd7f9a1117
+# pusher_secret: abdc3b896a0ffb85d373
+# stripe_api_key: sk_test_2J0l093xOyW72XUYJHE4Dv2r
+# stripe_publishable_key: pk_test_ro9jV5SNwGb1yYlQfzG17LHK
+#
+# production:
+#   stripe_api_key: sk_live_EeHnL644i6zo4Iyq4v1KdV9H
+#   stripe_publishable_key: pk_live_9lcthxpSIHbGwmdO941O1XVU
+development:
+  session_secret: abfe20aa7cce4f41d8fc600a8a0c146c327f8f95c1d99b39f91c867364755b818c336327c77a49772b686ababc16f0832273232f8a28ecb21f60224949644401
+
+production:
+  session_secret: 60d5a2d62894b83ae77dba71f1b2f50e602fddc76e28bc0c71f5e28e09c4960774c5239fc25e3bcbc3ba9fca71845aa33b382f7e7b8b8214ddff8c1a4cc7521e
