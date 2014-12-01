@@ -1,0 +1,23 @@
+<div class="panel panel-primary">
+  <div class="panel-heading">
+    <h3 class="panel-title">Last 10 Mentions</h3>
+  </div>
+  <table class="table">
+    <thead>
+      <tr class="filters">
+        <th>Who</th>
+        <th>Where</th>
+        <th>When</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @tweets.each do |tweet| %>
+      <tr>
+        <td><%= tweet.screen_name %></td>
+        <td><%= tweet.place %></td>
+        <td><%= tweet.tweet_created_at %></td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
