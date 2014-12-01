@@ -15,8 +15,9 @@ class Mention < ActiveRecord::Base
   end
 
   def get_fields_from_tweet
-    self.twitter_tweet_id = tweet.id
-    self.screen_name = tweet.user.screen_name
+    self.update_attributes(twitter_tweet_id: tweet.id,
+                           screen_name: tweet.user.screen_name,
+                           tweet_created_at: tweet.created_at)
   end
 
   def get_location_from_tweet
