@@ -2,6 +2,8 @@ class User < ActiveRecord::Base
 
   include BCrypt
 
+  has_many :mentions
+
   validates_uniqueness_of :email
   validates_presence_of :name, :email
   validates :password, length: { minimum: 6 }
@@ -27,4 +29,20 @@ class User < ActiveRecord::Base
   def authenticate pass
     self.password == pass
   end
+
+  def fetch_new_twitter_mentions
+    if self.mentions.any?
+      new_mentions = self.t_account.mentions(since_id: self.mentions.last.twitter_tweet_id)
+    else
+      new_mentions = self.t_account.mentions
+    end
+    if new_mentions.any?
+      new_mentions.reverse_each do |tweet|
+        mention = self.mentions.build
+        mention.add_tweet_data(tweet)
+        mention.save
+      end
+    end
+  end
+
 end
