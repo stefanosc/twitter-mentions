@@ -19,6 +19,7 @@ gem 'activerecord', '~>4.1'
 gem 'rake'
 gem 'bcrypt-ruby'
 gem 'twitter'
+gem 'geocoder'
 
 group :test do
   gem 'shoulda-matchers'
