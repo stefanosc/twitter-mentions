@@ -26,6 +26,7 @@ require 'erb'
 require 'haml'
 require 'bcrypt'
 require "twitter"
+require "geocoder"
 
 TClient = Twitter::REST::Client.new do |config|
   config.consumer_key    = ENV["T_CONSUMER_KEY"]
