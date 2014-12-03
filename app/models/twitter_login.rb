@@ -5,8 +5,8 @@ class TwitterLogin
 
   def initialize(credentials={})
     @credentials = credentials
-    @credentials.merge!({consumer_key: ENV["T_CONSUMER_KEY"],
-                        consumer_secret: ENV["T_CONSUMER_SECRET"]})
+    @credentials.merge!({consumer_key: ENV["CONSUMER_KEY"],
+                        consumer_secret: ENV["CONSUMER_SECRET"]})
   end
 
   def request_oauth_token

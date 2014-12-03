@@ -1,5 +1,6 @@
 class Mention < ActiveRecord::Base
   belongs_to :user
+  belongs_to :author, class_name: 'User'
 
   extend Geocoder::Model::ActiveRecord
 
@@ -12,6 +13,7 @@ class Mention < ActiveRecord::Base
     self.tweet = twitter_tweet
     get_fields_from_tweet
     get_location_from_tweet
+    find_or_create_author_from_tweet
   end
 
   def get_fields_from_tweet
@@ -34,9 +36,21 @@ class Mention < ActiveRecord::Base
       end
       self.twitter_place_id = tweet.place.id
       geocode
-    elsif tweet.user.location?
+    elsif tweet.user.location? and Geocoder.search(tweet.user.location).any?
       self.place = tweet.user.location
       geocode
+    end
+  end
+
+  def find_or_create_author_from_tweet
+    if author = User.find_by(twitter_id: tweet.user.id)
+      self.author = author
+    else
+      self.author.create(name: tweet.user.name,
+                        screen_name: tweet.user.screen_name,
+                        twitter_created_at: tweet.user.created_at,
+                        twitter_id: tweet.user.id,
+                        profile_image_url: tweet.user.profile_image_url)
     end
   end
 

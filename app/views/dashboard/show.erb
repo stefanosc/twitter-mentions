@@ -1,17 +1,27 @@
-<% content_for :head_tag do %>
+<% #content_for :head_tag do %>
   <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDysjR8gss3Kr71BXyKArAmwPRSUUqqWww"></script>
     <script type="text/javascript">
       function initialize() {
+        var myLatlng = new google.maps.LatLng(0,0);
         var mapOptions = {
-          center: { lat: -34.397, lng: 150.644},
-          zoom: 8
+          zoom: 1,
+          mapTypeId: 'terrain',
+          center: myLatlng
         };
-        var map = new google.maps.Map(document.getElementById('map-canvas'),
-            mapOptions);
+        var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+        var coords = JSON.parse($('div.coords').attr('coords'));
+        for (var i = coords.length - 1; i >= 0; i--) {
+          var markerLatlng = new google.maps.LatLng(coords[i][0],coords[i][1]);
+          var marker = new google.maps.Marker({
+              position: markerLatlng,
+              map: map,
+              title: 'Hello World!'
+          });
+        }
       }
       google.maps.event.addDomListener(window, 'load', initialize);
     </script>
-<% end %>
+<%# end %>
 <div class="row">
   <div class="col-sm-6 col-md-6">
     <div id="map-canvas" style="height:500px;width:100%"></div>
@@ -19,6 +29,7 @@
   <div class="col-sm-6 col-md-6">
     <%= erb :"dashboard/_top_tweeters" %>
     <%= erb :"dashboard/_tweets_table" %>
+    <%= erb :"dashboard/_coords" %>
   </div>
 </div>
 

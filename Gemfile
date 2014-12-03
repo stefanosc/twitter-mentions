@@ -7,6 +7,7 @@ gem 'pg'
 gem 'sinatra'
 gem 'sinatra-contrib'
 gem 'sinatra-flash'
+gem 'oauth'
 
 gem "dotenv"
 gem 'haml'

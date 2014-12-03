@@ -13,14 +13,15 @@ require 'rubygems'
 
 require 'uri'
 require 'pathname'
+require 'oauth'
 
 require 'pg'
 require 'active_record'
 require 'logger'
 
 require 'sinatra'
-require "sinatra/reloader" if development?
-require "sinatra/content_for"
+# require 'sinatra/contrib'
+# require "sinatra/reloader" if development?
 require 'sinatra/flash'
 
 require 'erb'
@@ -29,10 +30,10 @@ require 'bcrypt'
 require "twitter"
 require "geocoder"
 
-TClient = Twitter::REST::Client.new do |config|
-  config.consumer_key    = ENV["T_CONSUMER_KEY"]
-  config.consumer_secret = ENV["T_CONSUMER_SECRET"]
-  config.bearer_token    = ENV["T_BEARER"]
+TClient ||= Twitter::REST::Client.new do |config|
+  config.consumer_key    = ENV["CONSUMER_KEY"]
+  config.consumer_secret = ENV["CONSUMER_SECRET"]
+  config.bearer_token    = ENV["BEARER"]
 end
 
 # Some helper constants for path-centric logic

@@ -5,6 +5,7 @@ class CreateMentions < ActiveRecord::Migration
       t.string :screen_name, :place
       t.float  :latitude, :longitude
       t.references :user
+      t.references :author
       t.datetime :tweet_created_at
       t.timestamps
     end

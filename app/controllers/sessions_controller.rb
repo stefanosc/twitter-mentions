@@ -19,3 +19,21 @@ delete '/sign_out' do
   redirect to '/'
 end
 
+get '/sign_in_with_twitter' do
+  redirect request_token.authorize_url
+end
+
+get '/auth' do
+  @access_token = request_token.get_access_token(:oauth_verifier => params[:oauth_verifier])
+  session.delete(:request_token)
+
+  if user = User.find_by(twitter_id: @access_token.params[:user_id])
+    session[:user_id] = user.id
+  else
+    user = User.create(screen_name: @access_token.params[:screen_name],
+                twitter_id: @access_token.params[:user_id],
+                access_token: @access_token.token,
+                access_token_secret:@access_token.secret)
+    session[:user_id] = user.id
+  end
+end

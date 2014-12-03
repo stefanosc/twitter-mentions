@@ -3,17 +3,18 @@ class User < ActiveRecord::Base
   include BCrypt
 
   has_many :mentions
+  has_many :created_tweets, class_name: "Mention", foreign_key: :author_id
 
-  validates_uniqueness_of :email
-  validates_presence_of :name, :email
-  validates :password, length: { minimum: 6 }
+  # validates_uniqueness_of :email
+  # validates_presence_of :name, :email
+  # validates :password, length: { minimum: 6 }
 
   def t_account
     @t_account ||= Twitter::REST::Client.new do |config|
-      config.consumer_key    = ENV["T_CONSUMER_KEY"]
-      config.consumer_secret = ENV["T_CONSUMER_SECRET"]
-      config.access_token = self.t_access_token
-      config.access_token_secret = self.t_access_token_secret
+      config.consumer_key    = ENV["CONSUMER_KEY"]
+      config.consumer_secret = ENV["CONSUMER_SECRET"]
+      config.access_token = self.access_token
+      config.access_token_secret = self.access_token_secret
     end
   end
 
