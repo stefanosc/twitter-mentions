@@ -34,6 +34,9 @@ get '/auth' do
                 twitter_id: @access_token.params[:user_id],
                 access_token: @access_token.token,
                 access_token_secret:@access_token.secret)
+    user.update_attributes(profile_image_url: self.t_account.user.profile_image_url,
+                           twitter_created_at: self.t_account.user.created_at)
     session[:user_id] = user.id
   end
+  redirect '/dashboard'
 end

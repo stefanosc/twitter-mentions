@@ -24,10 +24,8 @@ helpers do
 
   def request_token
     if not session[:request_token]
-      host_and_port = request.host
-      host_and_port << ":9393" if request.host == "localhost"
       session[:request_token] = oauth_consumer.get_request_token(
-        :oauth_callback => "http://#{host_and_port}/auth"
+        :oauth_callback => ENV["OAUTH_CALLBACK"]
       )
     end
     session[:request_token]

@@ -47,7 +47,7 @@ configure do
   set :root, APP_ROOT.to_path
   # See: http://www.sinatrarb.com/faq.html#sessions
   enable :sessions
-  set :session_secret, ENV['SESSION_SECRET']
+  set :session_secret, ENV['SESSION_SECRET'] || "adflkjlkjlkjadsfadsflk"
   # Set haml as default engine
   set :haml, :format => :html5
   # Set the views to
