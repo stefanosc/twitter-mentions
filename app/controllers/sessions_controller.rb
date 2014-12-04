@@ -15,7 +15,7 @@ post '/sign_in' do
 end
 
 delete '/sign_out' do
-  session[:user_id] = nil
+  session[:twitter_id] = nil
   redirect to '/'
 end
 
@@ -24,19 +24,27 @@ get '/sign_in_with_twitter' do
 end
 
 get '/auth' do
-  @access_token = request_token.get_access_token(:oauth_verifier => params[:oauth_verifier])
-  session.delete(:request_token)
-
-  if user = User.find_by(twitter_id: @access_token.params[:user_id])
-    session[:user_id] = user.id
-  else
-    user = User.create(screen_name: @access_token.params[:screen_name],
-                twitter_id: @access_token.params[:user_id],
-                access_token: @access_token.token,
-                access_token_secret:@access_token.secret)
-    user.update_attributes(profile_image_url: self.t_account.user.profile_image_url,
-                           twitter_created_at: self.t_account.user.created_at)
-    session[:user_id] = user.id
+  begin
+    @access_token = request_token.get_access_token(:oauth_verifier => params[:oauth_verifier])
+    session.delete(:request_token)
+    if user = User.find_by(twitter_id: @access_token.params[:user_id])
+      session[:twitter_id] = user.twitter_id
+      user.update_attributes(access_token: @access_token.token,
+                             access_token_secret:@access_token.secret) unless valid_credentials?
+    else
+      user = User.create(screen_name: @access_token.params[:screen_name],
+                  twitter_id: @access_token.params[:user_id],
+                  access_token: @access_token.token,
+                  access_token_secret:@access_token.secret)
+      user.update_attributes(profile_image_url: self.t_account.user.profile_image_url,
+                             twitter_created_at: self.t_account.user.created_at)
+      session[:twitter_id] = user.twitter_id
+    end
+    redirect '/dashboard'
+  rescue Exception => e
+    flash[:"alert alert-danger"] = "There was a problem signing in, please try again"
+    redirect '/sign_in'
+  ensure
+    session.delete(:request_token)
   end
-  redirect '/dashboard'
 end

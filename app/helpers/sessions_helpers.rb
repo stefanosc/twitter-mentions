@@ -1,20 +1,34 @@
 helpers do
 
   def current_user
-    if session[:user_id]
-      @user ||= User.find(session[:user_id])
+    if session[:twitter_id]
+      @user ||= User.find_by(twitter_id: session[:twitter_id])
     end
   end
 
   def require_user
-    unless current_user
+    if current_user
+      verify_credentials
+    else
       flash[:"alert alert-danger"] = "The page you tried to access requires sign in"
       redirect '/sign_in'
     end
   end
 
+  def valid_credentials?
+    current_user.t_account.verify_credentials
+  rescue Twitter::Error::Unauthorized => e
+    false
+  end
+
+  def verify_credentials
+    current_user.t_account.verify_credentials
+  rescue Twitter::Error::Unauthorized => e
+    flash[:"alert alert-info"] = "please click on the \"Login with Twitter\" button"
+    redirect '/sign_in'
+  end
+
   def oauth_consumer
-    raise RuntimeError, "You must set CONSUMER_KEY and CONSUMER_SECRET in your server environment." unless ENV['CONSUMER_KEY'] && ENV['CONSUMER_SECRET']
     @consumer ||= OAuth::Consumer.new(
       ENV['CONSUMER_KEY'],
       ENV['CONSUMER_SECRET'],
