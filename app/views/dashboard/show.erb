@@ -6,7 +6,7 @@
 
         var myLatlng = new google.maps.LatLng(0,0);
         var mapOptions = {
-          zoom: 1,
+          zoom: 2,
           mapTypeId: 'terrain',
           center: myLatlng,
           styles: styles
@@ -27,12 +27,14 @@
 <%# end %>
 <div class="row">
   <div class="col-sm-6 col-md-6">
-    <div id="map-canvas" style="height:500px;width:100%"></div>
+    <%= erb :"dashboard/_top_tweeters" %>
   </div>
   <div class="col-sm-6 col-md-6">
-    <%= erb :"dashboard/_top_tweeters" %>
     <%= erb :"dashboard/_tweets_table" %>
     <%= erb :"dashboard/_coords" %>
+  </div>
+  <div class="col-sm-12 col-md-10 col-md-offset-1">
+    <div id="map-canvas" style="height:600px"></div>
   </div>
 </div>
 

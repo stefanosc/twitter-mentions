@@ -13,7 +13,7 @@
     <tbody>
       <% @tweets.each do |tweet| %>
       <tr>
-        <td><%= tweet.screen_name %></td>
+        <td><a href="<%= profile_url(tweet.screen_name) %>">@<%= tweet.screen_name %></a></td>
         <td><%= tweet.place %></td>
         <td><%= tweet.tweet_created_at %></td>
       </tr>

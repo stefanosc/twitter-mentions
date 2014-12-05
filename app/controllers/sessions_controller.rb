@@ -3,6 +3,7 @@ get '/sign_in' do
 end
 
 post '/sign_in' do
+  redirect '/dashboard' if current_user
   if @user = User.find_by_email(params[:email]) and
   @user.authenticate(params[:password])
     session[:user_id] = @user.id
@@ -36,12 +37,13 @@ get '/auth' do
                   twitter_id: @access_token.params[:user_id],
                   access_token: @access_token.token,
                   access_token_secret:@access_token.secret)
-      user.update_attributes(profile_image_url: self.t_account.user.profile_image_url,
-                             twitter_created_at: self.t_account.user.created_at)
+      user.update_attributes(profile_image_url: user.t_account.user.profile_image_url.to_s,
+                             twitter_created_at: user.t_account.user.created_at,
+                             name: user.t_account.user.name)
       session[:twitter_id] = user.twitter_id
     end
     redirect '/dashboard'
-  rescue Exception => e
+  rescue => e
     flash[:"alert alert-danger"] = "There was a problem signing in, please try again"
     redirect '/sign_in'
   ensure
