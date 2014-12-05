@@ -67,6 +67,8 @@ td.profile-cell {
 #footer {
   margin-top: 10%;
   color: #fff;
+  bottom: 0;
+  width: 100%;
 }
 .color-primary-2 { background-color: #319CEE }
 #footer.color-primary-3 { background-color: #7BBDEF }
