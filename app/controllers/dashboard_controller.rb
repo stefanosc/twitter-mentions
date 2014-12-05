@@ -1,7 +1,8 @@
 get '/dashboard' do
   require_user
+  current_user.fetch_new_twitter_mentions
   @tweets = current_user.mentions.reverse_order.limit(10)
-  @coords = current_user.mentions.where("latitude IS NOT NULL").pluck(:latitude, :longitude)
+  @coords = current_user.mentions.includes(:author).where("latitude IS NOT NULL").pluck(:latitude, :longitude, :profile_image_url)
   @top_mentioners = current_user.mentions.limit(5).group(:screen_name).count
   if @top_mentioners.any?
     @max_count = @top_mentioners.max_by { |key, val| val }.last
