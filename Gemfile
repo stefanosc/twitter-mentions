@@ -22,6 +22,8 @@ gem 'rake'
 gem 'bcrypt-ruby'
 gem 'twitter'
 gem 'geocoder'
+gem 'pry'
+gem 'pry-byebug'
 
 group :test do
   gem 'shoulda-matchers'
@@ -29,8 +31,6 @@ group :test do
 end
 
 group :test, :development do
-  gem 'pry'
-  gem 'pry-byebug'
   gem 'shotgun'
   gem 'rspec'
   gem 'fabrication'
