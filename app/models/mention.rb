@@ -46,11 +46,15 @@ class Mention < ActiveRecord::Base
     if author = User.find_by(twitter_id: tweet.user.id)
       self.author = author
     else
-      self.create_author(name: tweet.user.name,
-                        screen_name: tweet.user.screen_name,
-                        twitter_created_at: tweet.user.created_at,
-                        twitter_id: tweet.user.id,
-                        profile_image_url: tweet.user.profile_image_url.to_s)
+      user = TClient.user(tweet.user.id)
+      self.create_author(name: user.name,
+                        screen_name: user.screen_name,
+                        twitter_created_at: user.created_at,
+                        twitter_id: user.id,
+                        profile_image_url: user.profile_image_uri_https.to_s,
+                        description: user.description,
+                        followers_count: user.followers_count,
+                        following_count: user.friends_count)
     end
   end
 

@@ -1,12 +1,12 @@
 <div class="panel panel-primary">
-  <div class="panel-heading">
+  <div class="panel-heading panel-twitter">
     <h3 class="panel-title">top 10 screen names that mentioned you</h3>
   </div>
 
   <div class="panel-body">
   <% @top_mentioners.each do |field, count| %>
     <% percent = count * 100 / @max_count %>
-      <div class="progress-details"> <a href="<%= profile_url(field) %>">@<%= field %></a><%= ": #{count} "+ "tweet".pluralize(count)%>
+      <div class="progress-details"> <a class="screen_name" href="<%= profile_url(field) %>">@<%= field %></a><%= ": #{count} "+ "tweet".pluralize(count)%>
       </div>
       <div class="progress">
         <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="<%= percent %>" aria-valuemin="0" aria-valuemax="100" style="width: <%= percent %>%">

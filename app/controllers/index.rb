@@ -3,7 +3,7 @@ get '/' do
   if current_user
     redirect '/dashboard'
   else
-    erb :index
+    erb :sign_in
   end
 end
 

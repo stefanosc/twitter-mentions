@@ -1,0 +1,15 @@
+<div class="profile-card media block-update-card" style="display:none">
+  <a class="close-profile" href="#"><i class="fa fa-times-circle"></i></a>
+  <a class="pull-left" href="https://twitter.com/<%= user.screen_name %>">
+    <img class="media-object update-card-MDimentions" src="<%= user.profile_image_url %>" alt="<%= user.screen_name %>">
+  </a>
+  <div class="media-body update-card-body">
+    <h4 class="media-heading"><%= user.screen_name %></h4>
+    <p><%= user.description %></p>
+    <table>
+      <tr>
+        <td>Following: <%= user.following_count %></td>
+        <td>Followers: <%= user.followers_count %></td>
+      </tr>
+    </table>
+  </div></div>

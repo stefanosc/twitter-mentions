@@ -1,5 +1,5 @@
 <div class="panel panel-primary">
-  <div class="panel-heading">
+  <div class="panel-heading panel-twitter">
     <h3 class="panel-title">Last 10 Mentions</h3>
   </div>
   <table class="table">
@@ -13,7 +13,10 @@
     <tbody>
       <% @tweets.each do |tweet| %>
       <tr>
-        <td><a href="<%= profile_url(tweet.screen_name) %>">@<%= tweet.screen_name %></a></td>
+        <td class="profile-cell"><a class="screen_name" href="<%= profile_url(tweet.screen_name) %>">@<%= tweet.screen_name %>
+            </a>
+          <%= erb :"dashboard/_profile", locals: {user: tweet.author} %>
+        </td>
         <td><%= tweet.place %></td>
         <td><%= tweet.tweet_created_at %></td>
       </tr>
