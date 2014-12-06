@@ -1,6 +1,7 @@
 $(document).ready(function () {
 
-$('a.screen_name').mouseenter(showProfileDiv).mouseleave(hideProfileDiv);
+$('a.screen_name').mouseenter(showProfileDiv);
+$('.profile-card').mouseleave(closeProfileDiv);
 
 function showProfileDiv (event) {
   var profileCard = $(event.target).parent('td').children('.profile-card')
@@ -19,12 +20,6 @@ function closeProfileDiv (event) {
   }
 }
 
-
-
-function hideProfileDiv (event) {
-  var profileCard = $(event.target).parents('td').children('.profile-card');
-  profileCard.mouseleave(closeProfileDiv);
-}
 
 
 });
