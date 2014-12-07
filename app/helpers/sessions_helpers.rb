@@ -8,7 +8,7 @@ helpers do
 
   def require_user
     if current_user
-      verify_credentials
+      # verify_credentials
     else
       flash[:"alert alert-danger"] = "The page you tried to access requires sign in"
       redirect '/sign_in'

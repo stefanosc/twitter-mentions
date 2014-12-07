@@ -1,5 +1,5 @@
-html, body {
-  min-height: 100%;
+html, body, .main {
+  height: 100%;
 }
 
 body {
@@ -13,6 +13,7 @@ body {
 
 .main {
   padding-top: 30px;
+  margin-bottom: -150px;
 }
 
 nav ul.nav {
@@ -40,13 +41,6 @@ nav .nav button:hover {
   text-decoration: none;
 }
 
-footer {
-  position: absolute;
-  bottom: 0px;
-  width: 100%;
-  height: 40px;
-}
-
 .panel-primary>.panel-heading.panel-twitter {
   background-color: #55ACEE;
   background-image: none;
@@ -56,19 +50,21 @@ td.profile-cell {
   position: relative;
 }
 
-.screen_name .profile {
-  position: absolute;
-  top: -10px;
-  padding:1px;
-  border:1px solid #021a40;
-  background-color:#ff0;
+#map-canvas {
+  min-height: 100%;
+  width: 100%;
+}
+
+div.map-container {
+  height: 90%;
 }
 
 #footer {
-  margin-top: 10%;
+  margin-top: 2%;
   color: #fff;
-  bottom: 0;
   width: 100%;
+  /*max-height: 150px;*/
+  display: inline-table;
 }
 .color-primary-2 { background-color: #319CEE }
 #footer.color-primary-3 { background-color: #7BBDEF }
@@ -77,9 +73,10 @@ td.profile-cell {
 
 .block-update-card.profile-card {
   position: absolute;
-  top: -95px;
+  top: -125px;
   left: -3px;
   height: 130px;
+  z-index: 9999;
 }
 
 .profile-card table {
